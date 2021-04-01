@@ -2,8 +2,8 @@ import React from 'react'
 
 const Control = () => {
     return (
-        <div>
-            Control
+        <div class=''>
+            <h3 class='text-left text-uppercase text-info'>Control</h3>
         </div>
     )
 }
