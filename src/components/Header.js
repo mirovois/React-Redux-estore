@@ -13,7 +13,7 @@ const Header = () => {
             </h3>
                 </Link>
             <div class='mx-2'>
-                <Link to='/order'>
+                <Link to='/basket'>
                 <HiShoppingCart class='mx-2' style={{height:'40',width:'40'}}/>
                 </Link>
                 <span>4</span>

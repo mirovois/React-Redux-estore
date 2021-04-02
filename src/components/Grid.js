@@ -28,8 +28,12 @@ const Grid = () => {
                 <div class = 'row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2'>
                     {items?.map(item =>
                         <Card 
-                        key={item.id}
+                        key={item._id}
+                        id={item._id}
                         image={item.image}
+                        name={item.name}
+                        price={item.price}
+                        quantity={item.quantity}
                         />
                     )}
                 </div>

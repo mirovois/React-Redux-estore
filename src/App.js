@@ -7,6 +7,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import Header from './components/Header';
 import { Home } from './components/Home';
 import Order from './components/Order';
+import Basket from './components/Basket';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Header />
       <Switch>
         <Route path='/' exact component={Home}/> 
+        <Route path='/basket/:id?' component={Basket}/> 
         <Route path='/order' component={Order}/> 
       </Switch>
     </div>
