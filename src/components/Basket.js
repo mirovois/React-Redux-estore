@@ -1,76 +1,100 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
+import {useHistory} from 'react-router-dom'
 import {BsXCircleFill} from 'react-icons/bs'
+import {removeFromBasket, addToBasket, decreaseByOne} from '../actions/basketActions'
 
-const Basket = ({match}) => {
-
-    const itemId = match.params.id
-    
+const Basket = () => {
+    const dispatch = useDispatch()
     const basketContent = useSelector(state => state.basket)
+
+    const history = useHistory()
     const{basket} = basketContent
-
-    // console.log('Basket component', basket)
-    // const[article,setArticle] = useState(basket)
-        // const[bask, setBask]= useState(basket)
     
+    console.log('Basket component', basket)    
 
-    // useEffect(() =>{
-    //     const fetchData =() =>{
-    //         setBask(basket)
-    //     }
-    //     fetchData()
-    //     console.log('Basket component', bask)
-       
-    // },[] )
+    const handleRemove = (idi) =>{
+        dispatch(removeFromBasket(idi))
+        console.log('Clicked for delete', idi)
+    }
 
+    const handleIncrease = (idi) =>{
+        dispatch(addToBasket(idi))
+    }
+    const handleDecrease = (idi) =>{
+        dispatch(decreaseByOne(idi))
+    }
 
-    // console.log('Basket component:', basket)
+    const handleCheckout = () =>{
+        history.push('/checkout')
+        console.log('Checkout')
+    }
     return (
-        <div class="container  mt-4">
-                <h1 class="display-4">Order</h1>
+        <>
+        {basket.length === 0 ? 
+            <h1 className='text-center my-4'>Your shopping basket is empty</h1>
+            :
+            (
+                <div class="container  mt-4">
+                <h1 class="display-4">Shopping basket</h1>
                 <p class="lead">You can change quantity of any product by adding or removing a certain item.</p>
                 <hr/>
-                <div class="w-50">
-                    <table class="table table-striped table-bordered table-hover">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th>#</th>
-                            <th>Bread</th>
-                            <th>qty</th>
-                            <th>price</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                       {basket.map((item,i) =>
-                        (<tr key={i}>
-                            <th>{i+1}</th>
-                            <td>{item.name}</td>
-                            <td>${item.price}</td>
-                            <td>{item.quantity}</td>
-                            {/* <button className="btn btn-primary">delete</button> */}
-                            <BsXCircleFill class='mx-2' color='primary' style={{height:'40',width:'40',backgroundColor:'transparent'}}/>
-                        </tr>
-                        
-                        )
-                       )}
-                       
-                        {/* <tr>
-                            <th>2</th>
-                            <td>Whole Wheat</td>
-                            <td>3</td>
-                            <td>$4.259</td>
-                        </tr>
-                        <tr>
-                            <th>3</th>
-                            <td>Rye Bread</td>
-                            <td>6</td>
-                            <td>$3.99</td>
-                        </tr> */}
-                        </tbody>
-                    </table>
+                <div className='row'>
+                    <div class="col-xs-12 col-md-8">
+                        <table class="table table-hover">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th className='text-center'>Bread</th>
+                                <th className='text-center'>Price</th>
+                                <th className='text-center'>Quantity</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                        {basket?.map((item,i) =>
+                            (<tr key={i}>
+                                <th>{i+1}</th>
+                                <td className='text-center'>{item.name}</td>
+                                <td className='text-center'>${item.price}</td>
+                                <td className='text-center'>                           
+                            <button
+                                disabled={item.inBasket >=item.quantity}
+                                onClick={() => handleIncrease(item.item)}
+                                className="btn btn-primary btn-sm"
+                            >+
+                            </button>
+                            &nbsp; {item.inBasket}&nbsp;&nbsp;
+                            <button
+                                onClick={() => handleDecrease(item.item)} 
+                                className="btn btn-primary btn-sm"
+                                >-</button>
+                            </td>
+                                <BsXCircleFill onClick={() =>handleRemove(item.item)} class='mx-2' size='2.5rem' color='inherit' cursor='pointer'  />
+                            </tr>                    
+                            )
+                        )}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div className='col-xs-12 col-md-4'>
+                        <div className='mx-2 p-4 bg-light'>
+                        <h1>Checkout</h1>
+                        <div className='d-flex justify-content-between align-items-center'>
+                            <h2 style={{'display':'inline-block'}}>Total:</h2>
+                            <h4 className='mr-4'>${basket.reduce((acc, item) => acc + item.price*item.inBasket, 0).toFixed(2)}</h4>    
+                        </div>
+                        <button className= 'btn btn-primary mt-2' onClick={handleCheckout}>Proceed to checkout</button>
+                        </div>
+                    </div>
+
                 </div>
-         </div>
+                </div>
+             )
+        
+        }
+
+    </>
     )
 }
-
 export default Basket

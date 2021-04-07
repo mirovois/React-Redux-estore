@@ -6,8 +6,9 @@ import store from './store'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import Header from './components/Header';
 import { Home } from './components/Home';
-import Order from './components/Order';
 import Basket from './components/Basket';
+import Checkout from './components/Checkout';
+import Payment from './components/Payment';
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
       <Switch>
         <Route path='/' exact component={Home}/> 
         <Route path='/basket/:id?' component={Basket}/> 
-        <Route path='/order' component={Order}/> 
+        <Route path='/checkout' component={Checkout}/> 
+        <Route path='/payment' component={Payment}/> 
       </Switch>
     </div>
     </Provider>

@@ -5,27 +5,24 @@ import {useDispatch, useSelector} from 'react-redux'
 import {getItems} from '../actions/itemsActions'
 
 const Grid = () => {
-    // const [items, setItems] = useState([])
-
+    
     const dispatch = useDispatch()
 
     const itemsList = useSelector(state => state.items)
 
+    const {basket} = useSelector(state => state.basket)
+
     const { items, loading} = itemsList
 
     useEffect(() =>{
-        // const fetchData = async () =>{
-        //     const response = await axios.get('/items');
-        //     setItems(response.data)
-        // } 
-        // fetchData();
         dispatch(getItems())
     },[dispatch])
-    console.log('Grid items:',items)
+
+   
     return (
         <div class='container px-4'>
             {loading ? <h1 class='text-center'>LOADING...</h1> : (
-                <div class = 'row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2'>
+                <div class = 'row row-cols-xs-1 row-cols-md-2 row-cols-lg-3 g-2 '>
                     {items?.map(item =>
                         <Card 
                         key={item._id}
