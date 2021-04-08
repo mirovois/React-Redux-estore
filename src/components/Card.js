@@ -1,12 +1,10 @@
 import React, {useState,useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {addToBasket} from '../actions/basketActions'
-import {BsFillPlusCircleFill} from 'react-icons/bs'
 
 
 export const Card = ({id,name,image,price,quantity}) => {
 
-    const[item, setItem] = useState({})
     const dispatch = useDispatch()
     const basketContent = useSelector(state => state.basket)
     const{basket} = basketContent
@@ -15,8 +13,6 @@ export const Card = ({id,name,image,price,quantity}) => {
     let storeItem = basket.find(object => object.item === id);
 
     const buttonDisabled = storeItem ? true : false;
-
-    const buttonStatus = storeItem ? "Added To Basket" : "Add to Basket";
    
     const handleAdd = () =>{        
         dispatch(addToBasket(id))

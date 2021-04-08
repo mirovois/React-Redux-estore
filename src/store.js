@@ -7,13 +7,14 @@ import basket from './reducers/basketReducer'
 const reducer = combineReducers({items, basket})
 
 const basketItemsStorage = localStorage.getItem('basket') ? JSON.parse(localStorage.getItem('basket')) : []
+const personalDetailsStorage = localStorage.getItem('personalDetails') ? JSON.parse(localStorage.getItem('personalDetails')) : {}
 
 const initialState = {
-    basket:basketItemsStorage
+    basket:{basket:basketItemsStorage,personalDetails:personalDetailsStorage},
 }
 // const initialState = []
 const middleware = [thunk]
 
-const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middleware)))
+const store = createStore(reducer, initialState.basket, composeWithDevTools(applyMiddleware(...middleware)))
 
 export default store

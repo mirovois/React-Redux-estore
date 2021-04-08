@@ -6,9 +6,9 @@ input {
 
 /* PAYMENT */
 .creditCardForm {
-  /* max-width: 700px;
+  max-width: 700px;
   background-color: #fff;
-  margin: 100px auto; */
+  margin: 100px auto;
   overflow: hidden;
   padding: 25px;
   color: #4c4e56;
@@ -61,9 +61,9 @@ input {
   margin-top: 25px;
 }
 .creditCardForm .payment .btn {
-  width: 100%;
-  margin-top: 3px;
-  font-size: 24px;
+  width: 35%;
+  margin-top: 15px;
+  font-size: clamp(0.2rem, 0.4rem + 1vw, 1rem);
   /* background-color: #2ec4a5; */
   color: white;
 }
@@ -74,7 +74,7 @@ input {
 .transparent {
   opacity: 0.2;
 }
-@media (max-width: 650px) {
+@media (max-width: 1350px) {
   .creditCardForm .owner,
   .creditCardForm .CVV,
   .creditCardForm #expiration-date,

@@ -1,4 +1,4 @@
-export  default  (state={basket:[]} , action) =>{
+export  default  (state={basket:[], personalDetails:{}} , action) =>{
     switch (action.type) {
         case 'ADD_TO_BASKET':         
             const itemInBasket = state.basket.find(item => item.item === action.payload.item)
@@ -35,7 +35,18 @@ export  default  (state={basket:[]} , action) =>{
             return{
                 ...state,
                 basket:state.basket.filter((item) =>item.item !== action.payload)
-                }        
+                } 
+        case "EMPTY_BASKET":
+            return{
+                ...state,
+                basket:[]
+                 }
+        
+        case "SAVE_PERSONAL_DETAILS":
+            return{
+                ...state,
+                personalDetails:action.payload
+                 }                
         default:
             return state   
 } } 

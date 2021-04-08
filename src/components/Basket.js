@@ -1,8 +1,9 @@
 import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useHistory} from 'react-router-dom'
-import {BsXCircleFill} from 'react-icons/bs'
-import {removeFromBasket, addToBasket, decreaseByOne} from '../actions/basketActions'
+import {BiChevronsLeft} from 'react-icons/bi'
+import {RiDeleteBin5Fill} from 'react-icons/ri'
+import {removeFromBasket, addToBasket, decreaseByOne,emptyBasket} from '../actions/basketActions'
 
 const Basket = () => {
     const dispatch = useDispatch()
@@ -25,6 +26,11 @@ const Basket = () => {
         dispatch(decreaseByOne(idi))
     }
 
+    const handleEmptyBasket = () =>{
+        dispatch(emptyBasket())
+        console.log('Empty basket')
+    }
+
     const handleCheckout = () =>{
         history.push('/checkout')
         console.log('Checkout')
@@ -41,7 +47,7 @@ const Basket = () => {
                 <hr/>
                 <div className='row'>
                     <div class="col-xs-12 col-md-8">
-                        <table class="table table-hover">
+                        <table class="table">
                             <thead class="thead-dark">
                             <tr>
                                 <th>#</th>
@@ -69,12 +75,21 @@ const Basket = () => {
                                 className="btn btn-primary btn-sm"
                                 >-</button>
                             </td>
-                                <BsXCircleFill onClick={() =>handleRemove(item.item)} class='mx-2' size='2.5rem' color='inherit' cursor='pointer'  />
+                                <RiDeleteBin5Fill onClick={() =>handleRemove(item.item)} class='mx-2' size={44} color='inherit' cursor='pointer'  />
                             </tr>                    
                             )
                         )}
                             </tbody>
                         </table>
+                        <div class="col-10 d-flex justify-content-between mb-4">
+                <button onClick={() => history.push('/')} className='btn btn-primary'> 
+                    <BiChevronsLeft size={20}/>Back to main
+                 </button>
+                <button onClick={handleEmptyBasket} class="btn btn-primary">
+                    <RiDeleteBin5Fill  class='mx-2' size={30} color='inherit' cursor='pointer'  />
+                    Empty basket
+                </button>
+            </div>
                     </div>
 
                     <div className='col-xs-12 col-md-4'>

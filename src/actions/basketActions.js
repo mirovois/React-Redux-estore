@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const addToBasket = (id,inBasket) => async(dispatch, getState) => {
+export const addToBasket = (id) => async(dispatch, getState) => {
         
     try{
         const {data} = await axios.get(`/items/${id}`)
@@ -22,7 +22,7 @@ export const addToBasket = (id,inBasket) => async(dispatch, getState) => {
     }
     }
 
-export  const removeFromBasket = (id) =>async (dispatch, getState) =>{
+    export  const removeFromBasket = (id) =>async (dispatch, getState) =>{
         try{
             dispatch({
                 type:"REMOVE_FROM_BASKET",
@@ -34,7 +34,17 @@ export  const removeFromBasket = (id) =>async (dispatch, getState) =>{
             console.log(error.message)
         }
     }    
-
+    export  const emptyBasket = () =>async (dispatch, getState) =>{
+        try{
+            dispatch({
+                type:"EMPTY_BASKET"
+            })
+            localStorage.setItem('basket', JSON.stringify(getState().basket))
+        }
+        catch(error){
+            console.log(error.message)
+        }
+    }
     export  const decreaseByOne = (id) =>async (dispatch, getState) =>{
         try{
             dispatch({
@@ -47,3 +57,11 @@ export  const removeFromBasket = (id) =>async (dispatch, getState) =>{
             console.log(error.message)
         }
     }  
+
+    export const savePersonalDetails = (data) => (dispatch) =>{
+        dispatch({
+            type:'SAVE_PERSONAL_DETAILS',
+            payload:data
+        })
+        localStorage.setItem('personalDetails', JSON.stringify(data))
+    } 

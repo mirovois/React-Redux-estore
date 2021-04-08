@@ -1,12 +1,66 @@
-import React from 'react'
+import React, {useState} from 'react'
 import visa from '../assets/visa.svg.png'
 import mastercard from'../assets/mastercard.svg'
 import {useSelector} from 'react-redux'
+import {BiChevronsLeft} from 'react-icons/bi'
 
-const Payment = ({form}) => {
+const Payment = ({history}) => {
     const basketContent = useSelector(state => state.basket)
 
-    const{basket} = basketContent
+    const{basket,personalDetails} = basketContent
+
+    const[form,setForm] = useState({})
+
+    const[errors, setErrors] = useState({})
+
+    const findFormErrors = () =>{
+        const {owner, cvv, cardNumber} = form
+        const newErrors = {}
+        if(!owner) {newErrors.owner = 'Enter cardholder\'s name!'
+        }
+        if(!cvv) {newErrors.cdd = 'Enter valid CVV!'
+        }
+        if(!cardNumber) {newErrors.cardNumber = 'Card is not valid!' }
+        // else{
+        //     if(!/^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/.test(cardNumber)){
+        //         newErrors.cardNumber = 'Card number is invalid!'
+        //     }
+        // }
+        return newErrors
+    }
+    
+    const setField = (field,value) =>{
+        setForm({...form, [field]:value})
+            if(!!errors[field]) setErrors({
+            ...errors,
+            [field]: null
+        }) }
+    
+    const handlePlaceOrder =(e) =>{
+            e.preventDefault()
+            const newErrors = findFormErrors()
+    
+            if (Object.keys(newErrors).length > 0) {
+                setErrors(newErrors)
+                console.log('Error is:',newErrors)
+            } else{
+                const personal = {
+                    owner:form.owner,
+                    cvv:form.cvv,
+                    cardNumber:form.cardNumber
+                }
+                // dispatch(savePersonalDetails(personal))
+                console.log('Submitted!!!',personal)
+                // history.push('/payment')
+            //     setForm({
+            //         owner:'',
+            //         cvv:'',
+            //         cardNumber:'',
+            //         // postal:'',
+            //         // email:'',
+            // })            
+            }
+        }
 
     return (
         <div className='container mt-3 mb-3 mr-4'>
@@ -19,20 +73,20 @@ const Payment = ({form}) => {
                         <h1>Confirm Purchase</h1>
                     </div>
                     <div class="payment">
-                        <form>
+                        <form onSubmit={handlePlaceOrder}>
                             <div class="form-group owner">
                                 <label for="owner">Owner</label>
-                                <input type="text" class="form-control" id="owner"/>
+                                <input type="text"  class="form-control" id="owner" onChange={e => setField('owner', e.target.value)}/>
                             </div>
 
                             <div class="form-group CVV">
                                 <label for="cvv">CVV</label>
-                                <input type="text" class="form-control" id="cvv"/>
+                                <input type="text" class="form-control" id="cvv" onChange={e => setField('cvv', e.target.value)}/>
                             </div>
 
                             <div class="form-group" id="card-number-field">
                                 <label for="cardNumber">Card Number</label>
-                                <input type="text" class="form-control" id="cardNumber"/>
+                                <input type="text" class="form-control" id="cardNumber" onChange={e => setField('cardNumber', e.target.value)}/>
                             </div>
 
                             <div class="form-group" id="expiration-date">
@@ -66,9 +120,17 @@ const Payment = ({form}) => {
                                 <img src={mastercard} id="mastercard" style={{height:'50px',width:'100px'}}/>
                             </div>
 
-                            <div class="form-group" id="pay-now">
+                            {/* <div class="form-group" id="pay-now">
                                 <button type="submit" class="btn btn-primary" id="confirm-purchase">Confirm</button>
+                            </div> */}
+                            <div class="col-12 d-flex justify-content-between mb-4 mt-4">
+                                <button onClick={() => history.push('/checkout')} className='btn btn-primary'>  
+                                <BiChevronsLeft size={28}/>
+                                Back to checkout
+                                </button>
+                                <button class="btn btn-primary" type="submit">Confirm</button>
                             </div>
+
                         </form>                      
                     </div>
                 </div>
@@ -77,8 +139,11 @@ const Payment = ({form}) => {
 <div class="col-md-1"> </div>
         <div class="col-md-4 mt-4 pt-4">
             <div class="bg-pay p-3"> <h3 class="font-weight-bold">Order Recap</h3>
-                <h5 class="font-weight-bold">Shipping</h5>
-                <p>Address</p>
+                <h5 class="font-weight-bold">Receiver:</h5>
+                <p>{personalDetails.firstName} {personalDetails.lastName}</p>
+                <h5 class="font-weight-bold">Shipping address</h5>
+                <p>{personalDetails.address}, {personalDetails.postal}
+                <br/> {personalDetails.city}, {personalDetails.country}</p>
                 <h5 class="font-weight-bold">Items({basket?.length})</h5>
                 {basket.map(item =>(
                 <div class="d-flex justify-content-between mt-2"> <span class="fw-500">{item.name} X {item.inBasket}</span> <span>${item.price*item.inBasket}</span> </div>

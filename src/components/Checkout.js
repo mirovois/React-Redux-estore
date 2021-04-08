@@ -1,28 +1,38 @@
 import React, {useState} from 'react'
 import {useHistory} from 'react-router-dom'
-import {useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
+import {savePersonalDetails} from '../actions/basketActions'
+import {BiChevronsLeft} from 'react-icons/bi'
 
 const Checkout = ({history}) => {
+    const dispatch = useDispatch()
     const basketContent = useSelector(state => state.basket)
 
-    const{basket} = basketContent
+    const{basket, personalDetails} = basketContent
 
-    const[form,setForm] = useState({})
+
     
-    const handleChange = (e) =>{
-        const{name,value} = e.currentTarget
-        setForm({...form, [name]:value})
-            if(!!errors[name]) setErrors({
-            ...errors,
-            [name]: null
-        })
-      
-    }
+    const[firstName,setFirstName] = useState(personalDetails.firstName)
+    const[lastName,setLastName] = useState(personalDetails.lastName)
+    const[email,setEmail] = useState(personalDetails.email)
+    const[address,setAddress] = useState(personalDetails.address)
+    const[postal,setPostal] = useState(personalDetails.postal)
+    const[city,setCity] = useState(personalDetails.city)
+    const[country,setCountry] = useState(personalDetails.country)
+    
+    // const[form,setForm] = useState({})
+    // const handleChange = (e) =>{
+    //     const{name,value} = e.currentTarget
+    //     setForm({...form, [name]:value})
+    //         if(!!errors[name]) setErrors({
+    //         ...errors,
+    //         [name]: null
+    //     }) }
 
     const[errors, setErrors] = useState({})
 
     const findFormErrors = () =>{
-        const {firstName,lastName,postal,address,email,card,expiration,code} = form
+        // const {firstName,lastName,postal,address,email,card,expiration,code} = form
         const newErrors = {}
         if(!firstName) {newErrors.firstName = 'Enter your first name!'
         }
@@ -52,21 +62,28 @@ const Checkout = ({history}) => {
             setErrors(newErrors)
             console.log('Error is:',newErrors)
         } else{
-            const shippingDetails = form
-            console.log('Submitted!!!',shippingDetails)
+            const personal = {
+                firstName,
+                lastName,
+                email,
+                address,
+                postal,
+                city,
+                country
+            }
+            dispatch(savePersonalDetails(personal))
+            console.log('Submitted!!!',personal)
             history.push('/payment')
-            setForm({
-                firstName:'',
-                lastName:'',
-                address:'',
-                postal:'',
-                email:'',
-                // card:'',
-                // expiration:'',
-                // code:''
-        })            
+        //     setForm({
+        //         firstName:'',
+        //         lastName:'',
+        //         address:'',
+        //         postal:'',
+        //         email:'',
+        // })            
         }
     }
+    
     return (
         <div className='container '>
             <div className='row mt-4'>
@@ -81,8 +98,8 @@ const Checkout = ({history}) => {
                        autoFocus
                        className="form-control"
                        name='firstName'
-                       value={form.firstName}  
-                       onChange= {handleChange} 
+                       value={firstName}  
+                       onChange= {(e)=>setFirstName(e.target.value)} 
                        />
                 {errors.firstName && 
                 <small className='primary' style={{
@@ -99,8 +116,8 @@ const Checkout = ({history}) => {
                     <input type="text" 
                        className="form-control"
                        name='lastName'
-                       value={form.lastName}  
-                       onChange= {handleChange} 
+                       value={lastName}  
+                       onChange= {(e)=>setLastName(e.target.value)} 
                        />
                 {errors.lastName && 
                 <small className='primary' style={{
@@ -117,8 +134,8 @@ const Checkout = ({history}) => {
                     <input type="text" 
                        className="form-control"
                        name='email'
-                       value={form.email}  
-                       onChange= {handleChange} 
+                       value={email}  
+                       onChange= {(e)=>setEmail(e.target.value)}
                        />
                 {errors.email && 
                 <small className='primary' style={{
@@ -137,14 +154,50 @@ const Checkout = ({history}) => {
                     <input type="text" 
                        className="form-control"
                        name='address'
-                       value={form.address}  
-                       onChange= {handleChange} 
+                       value={address}  
+                       onChange= {(e)=>setAddress(e.target.value)}
                        />
                 {errors.address && 
                 <small className='primary' style={{
                     fontWeight: 'bold',
                     color: 'red',
                   }}>{errors.address}</small>
+                }
+                </div>
+             </div>
+
+             <div class="row mb-3 px-4">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-form-label-lg">City * :</label>          
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" 
+                       className="form-control"
+                       name='city'
+                       value={city}  
+                       onChange= {(e)=>setCity(e.target.value)} 
+                       />
+                {errors.postal && 
+                <small className='primary' style={{
+                    fontWeight: 'bold',
+                    color: 'red',
+                  }}>{errors.city}</small>
+                }
+                </div>
+             </div>
+
+             <div class="row mb-3 px-4">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-form-label-lg">Country * :</label>          
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" 
+                       className="form-control"
+                       name='country'
+                       value={country}  
+                       onChange= {(e)=>setCountry(e.target.value)} 
+                       />
+                {errors.country && 
+                <small className='primary' style={{
+                    fontWeight: 'bold',
+                    color: 'red',
+                  }}>{errors.country}</small>
                 }
                 </div>
              </div>
@@ -155,8 +208,8 @@ const Checkout = ({history}) => {
                     <input type="text" 
                        className="form-control"
                        name='postal'
-                       value={form.postal}  
-                       onChange= {handleChange} 
+                       value={postal}  
+                       onChange= {(e)=>setPostal(e.target.value)} 
                        />
                 {errors.postal && 
                 <small className='primary' style={{
@@ -177,8 +230,10 @@ const Checkout = ({history}) => {
             </div>
 
            
-             <div class="col-10 d-flex justify-content-between mb-4">
-                <button onClick={() => history.push('/basket')} className='btn btn-primary'>  Back to cart</button>
+            <div class="col-10 d-flex justify-content-between mb-4">
+                <button onClick={() => history.push('/basket')} className='btn btn-primary'> 
+                    <BiChevronsLeft size={20}/>Back to cart
+                 </button>
                 <button class="btn btn-primary" type="submit">Payment</button>
             </div>
 
