@@ -1,10 +1,12 @@
 import React, {useState} from 'react'
 import visa from '../assets/visa.svg.png'
 import mastercard from'../assets/mastercard.svg'
-import {useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {BiChevronsLeft} from 'react-icons/bi'
+import {addOrder} from  '../actions/orderActions'
 
 const Payment = ({history}) => {
+    const dispatch = useDispatch()
     const basketContent = useSelector(state => state.basket)
 
     const{basket,personalDetails} = basketContent
@@ -36,6 +38,8 @@ const Payment = ({history}) => {
             [field]: null
         }) }
     
+    const totalPrice = basket.reduce((acc, item) => acc + item.price*item.inBasket, 0).toFixed(2)
+        
     const handlePlaceOrder =(e) =>{
             e.preventDefault()
             const newErrors = findFormErrors()
@@ -49,8 +53,18 @@ const Payment = ({history}) => {
                     cvv:form.cvv,
                     cardNumber:form.cardNumber
                 }
-                // dispatch(savePersonalDetails(personal))
                 console.log('Submitted!!!',personal)
+                const order = {
+                    orderItems:basket,
+                    personalDetails:personalDetails,
+                    totalPrice:Number(totalPrice)
+                }
+                dispatch(addOrder({
+                    orderItems:basket,
+                    personalDetails:personalDetails,
+                    totalPrice:Number(totalPrice)
+                }))
+                console.log('Created order:',order)
                 // history.push('/payment')
             //     setForm({
             //         owner:'',
@@ -149,7 +163,7 @@ const Payment = ({history}) => {
                 <div class="d-flex justify-content-between mt-2"> <span class="fw-500">{item.name} X {item.inBasket}</span> <span>${item.price*item.inBasket}</span> </div>
                 ))}
                 <hr/>
-                <div class="d-flex justify-content-between mt-2"> <span class="fw-500">Total </span> <span class="text-success">${basket.reduce((acc, item) => acc + item.price*item.inBasket, 0).toFixed(2)}</span> </div>
+                <div class="d-flex justify-content-between mt-2"> <span class="fw-500">Total </span> <span class="text-success">${totalPrice}</span> </div>
                 <hr/>
             </div>
         </div>
