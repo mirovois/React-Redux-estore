@@ -9,6 +9,7 @@ import { Home } from './components/Home';
 import Basket from './components/Basket';
 import Checkout from './components/Checkout';
 import Payment from './components/Payment';
+import Orders from './components/Orders';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path='/basket/:id?' component={Basket}/> 
         <Route path='/checkout' component={Checkout}/> 
         <Route path='/payment' component={Payment}/> 
+        <Route path='/orders' component={Orders} />
       </Switch>
     </div>
     </Provider>

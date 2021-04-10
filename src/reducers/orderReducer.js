@@ -1,13 +1,21 @@
-export default (state ={}, action) =>{
+export default (state ={orders:[]}, action) =>{
     switch(action.type){
-        case 'ORDER_ADD_REQUEST':
+        case 'FETCH_ORDERS':
             return{
-                loading:true,
+                ...state,
+                orders:action.payload
             }
+        // case 'ORDER_ADD_REQUEST':
+        //     return{
+        //         loading:true,
+        //     }
         case 'ORDER_ADD_SUCCESS':
             return{
-                loading:false,
-                order:action.payload
+                // loading:false,
+                // order:action.payload
+                ...state,
+                orders:[...state.orders,action.payload ]
+
             }
         // case 'ORDER_ADD_FAIL':
         //     return {

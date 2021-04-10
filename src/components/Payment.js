@@ -4,6 +4,7 @@ import mastercard from'../assets/mastercard.svg'
 import {useDispatch, useSelector} from 'react-redux'
 import {BiChevronsLeft} from 'react-icons/bi'
 import {addOrder} from  '../actions/orderActions'
+import {emptyBasket} from '../actions/basketActions'
 
 const Payment = ({history}) => {
     const dispatch = useDispatch()
@@ -64,15 +65,9 @@ const Payment = ({history}) => {
                     personalDetails:personalDetails,
                     totalPrice:Number(totalPrice)
                 }))
-                console.log('Created order:',order)
-                // history.push('/payment')
-            //     setForm({
-            //         owner:'',
-            //         cvv:'',
-            //         cardNumber:'',
-            //         // postal:'',
-            //         // email:'',
-            // })            
+                // dispatch(emptyBasket())
+                history.push('/')
+                console.log('Created order:',order)      
             }
         }
 
