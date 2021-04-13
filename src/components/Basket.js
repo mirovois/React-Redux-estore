@@ -1,19 +1,19 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useHistory} from 'react-router-dom'
 import {BiChevronsLeft} from 'react-icons/bi'
+import {BiChevronsRight} from 'react-icons/bi'
 import {RiDeleteBin5Fill} from 'react-icons/ri'
 import {removeFromBasket, addToBasket, decreaseByOne,emptyBasket} from '../actions/basketActions'
+import Modal from './Modal'
 
 const Basket = () => {
-    const dispatch = useDispatch()
-    const basketContent = useSelector(state => state.basket)
-
     const history = useHistory()
-    const{basket} = basketContent
+    const dispatch = useDispatch()
     
-    console.log('Basket component', basket)    
-
+    const basketContent = useSelector(state => state.basket)
+    const{basket} = basketContent
+  
     const handleRemove = (idi) =>{
         dispatch(removeFromBasket(idi))
         console.log('Clicked for delete', idi)
@@ -22,6 +22,7 @@ const Basket = () => {
     const handleIncrease = (idi) =>{
         dispatch(addToBasket(idi))
     }
+
     const handleDecrease = (idi) =>{
         dispatch(decreaseByOne(idi))
     }
@@ -33,11 +34,11 @@ const Basket = () => {
 
     const handleCheckout = () =>{
         history.push('/checkout')
-        console.log('Checkout')
     }
+
     return (
         <>
-        {basket.length === 0 ? 
+        {!basket ? 
             <h1 className='text-center my-4'>Your shopping basket is empty</h1>
             :
             (
@@ -90,7 +91,7 @@ const Basket = () => {
                     Empty basket
                 </button>
             </div>
-                    </div>
+        </div>
 
                     <div className='col-xs-12 col-md-4'>
                         <div className='mx-2 p-4 bg-light'>
@@ -99,16 +100,16 @@ const Basket = () => {
                             <h2 style={{'display':'inline-block'}}>Total:</h2>
                             <h4 className='mr-4'>${basket.reduce((acc, item) => acc + item.price*item.inBasket, 0).toFixed(2)}</h4>    
                         </div>
-                        <button className= 'btn btn-primary mt-2' onClick={handleCheckout}>Proceed to checkout</button>
+                        <button className= 'btn btn-primary mt-2' onClick={handleCheckout}>
+                            Proceed to checkout
+                            <BiChevronsRight />
+                            </button>
                         </div>
                     </div>
-
                 </div>
                 </div>
              )
-        
         }
-
     </>
     )
 }

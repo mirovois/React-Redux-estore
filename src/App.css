@@ -102,3 +102,29 @@ textarea:focus:valid {
   background-color: #eee;
   border-radius: 2px;
 }
+
+/* MODAL */
+.myModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+}
+.myModal .myContainer {
+  position: absolute;
+  left: 50%;
+  top: 25%;
+  transform: translate(-50%, -25%);
+  background: rgb(182, 189, 187);
+  background: linear-gradient(
+    90deg,
+    rgba(23, 65, 57, 0.8) 37%,
+    rgba(44, 106, 36, 1) 100%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  color: black;
+}
+
+/* .gitIgnore CONTENT */

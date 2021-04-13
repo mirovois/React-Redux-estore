@@ -42,10 +42,37 @@ export const bread = [
     {
         id:6,
         name:'White bread',
-        description:'White bread typically refers to breads made from wheat flour ',
-        image:"https://source.unsplash.com//uugOo5Lr_iM",
+        description:'White bread typically refers to breads made from wheat flour.',
+        image:"https://source.unsplash.com/uugOo5Lr_iM",
         quantity:1,
         price:4.05
+
+    },
+    {
+        id:7,
+        name:'Focaccia',
+        description:'Flat oven-baked Italian bread similar in style and texture to pizza. ',
+        image:"https://source.unsplash.com/s2VbmuZzo60",
+        quantity:8,
+        price:3.95
+
+    },
+    {
+        id:8,
+        name:'Baguette',
+        description:'French bread that is commonly made from basic lean dough. ',
+        image:"https://source.unsplash.com/cWXibBbXx44",
+        quantity:7,
+        price:3.95
+
+    },
+    {
+        id:9,
+        name:'Zuccini bread',
+        description:'Zucchini bread is a slightly sweet quick bread, with a hint of cinnamon. ',
+        image:"https://source.unsplash.com/yXozPFHQS8s",
+        quantity:10,
+        price:4.75
 
     }
 ] 

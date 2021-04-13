@@ -10,7 +10,7 @@ export const Card = ({id,name,image,price,quantity}) => {
     const{basket} = basketContent
 
 
-    let storeItem = basket.find(object => object.item === id);
+    let storeItem = basket?.find(object => object.item === id);
 
     const buttonDisabled = storeItem ? true : false;
    

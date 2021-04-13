@@ -12,9 +12,3 @@ export const getItems = () =>async (dispatch) => {
             console.log(error.message)
         }
     }
-    // catch (error){
-    //     dispatch({
-    //         type: 'ITEMS_FAIL',
-    //         payload: error.message
-    //     })
-    // }

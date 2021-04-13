@@ -7,33 +7,27 @@ import {BiChevronsDown} from 'react-icons/bi'
 import {BiChevronsUp} from 'react-icons/bi'
 
 const Grid = () => {
-    // const [items, setItems] = useState([])
-    const[expended, setExpended] = useState(false)
-    const[itemsToShow, setItemsToShow] = useState(3) 
     const dispatch = useDispatch()
+    
+    const[expended, setExpended] = useState(false)
+    const[itemsToShow, setItemsToShow] = useState(6) 
 
     const itemsList = useSelector(state => state.items)
-
-    const {basketItems} = useSelector(state => state.basket)
-
     const { items, loading} = itemsList
 
-    // const itemsToShow = 3
-
     const showMore =() =>{
-        if (itemsToShow === 3) {
+        if (itemsToShow === 6) {
             setExpended(true)
             setItemsToShow(items.length)
         } else {
-            setItemsToShow(3)
+            setItemsToShow(6)
             setExpended(false)
         }
     }
 
     useEffect(() =>{
         dispatch(getItems())
-    },[dispatch])
-
+    },[dispatch])   
    
     return (
         <div class='container px-4'>
@@ -56,10 +50,8 @@ const Grid = () => {
                     (<span className='mx-auto'>
                         <BiChevronsUp style={{height:'40',width:'40'}}/>
                         HIDE
-
                     </span>
-                ) 
-                :
+                ) :
                 (<span className='mx-auto'>
                     <BiChevronsDown style={{height:'40',width:'40'}}/>
                     SHOW MORE
@@ -71,5 +63,4 @@ const Grid = () => {
         </div>
     )
 }
-
 export default Grid

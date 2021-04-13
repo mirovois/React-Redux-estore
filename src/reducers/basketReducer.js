@@ -41,6 +41,11 @@ export  default  (state={basket:[], personalDetails:{}} , action) =>{
                 ...state,
                 basket:[]
                  }
+        case "RESET_PERSONAL_DETAILS":
+            return{
+                ...state,
+                personalDetails:{}
+                 }
         
         case "SAVE_PERSONAL_DETAILS":
             return{

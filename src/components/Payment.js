@@ -5,15 +5,20 @@ import {useDispatch, useSelector} from 'react-redux'
 import {BiChevronsLeft} from 'react-icons/bi'
 import {addOrder} from  '../actions/orderActions'
 import {emptyBasket} from '../actions/basketActions'
+import {resetPersonalDetails} from '../actions/basketActions'
+import Modal from './Modal'
+// import Modal from './Modal'
 
 const Payment = ({history}) => {
     const dispatch = useDispatch()
     const basketContent = useSelector(state => state.basket)
 
     const{basket,personalDetails} = basketContent
-
+        
+    const [showModal, setShowModal] = useState(false)
+    
     const[form,setForm] = useState({})
-
+    
     const[errors, setErrors] = useState({})
 
     const findFormErrors = () =>{
@@ -65,8 +70,10 @@ const Payment = ({history}) => {
                     personalDetails:personalDetails,
                     totalPrice:Number(totalPrice)
                 }))
-                // dispatch(emptyBasket())
-                history.push('/')
+                setShowModal(true)
+                dispatch(emptyBasket())
+                dispatch(resetPersonalDetails())
+                // history.push('/')
                 console.log('Created order:',order)      
             }
         }
@@ -82,6 +89,7 @@ const Payment = ({history}) => {
                         <h1>Confirm Purchase</h1>
                     </div>
                     <div class="payment">
+                        
                         <form onSubmit={handlePlaceOrder}>
                             <div class="form-group owner">
                                 <label for="owner">Owner</label>
@@ -139,10 +147,15 @@ const Payment = ({history}) => {
                                 </button>
                                 <button class="btn btn-primary" type="submit">Confirm</button>
                             </div>
-
-                        </form>                      
+                        </form>    
                     </div>
                 </div>
+
+
+                {/* MODAL */}
+                {showModal && (
+            <Modal showModal={showModal} setShowModal={setShowModal} history={history}/>            
+                )}
 
 {/* Shipping recap */}
 <div class="col-md-1"> </div>

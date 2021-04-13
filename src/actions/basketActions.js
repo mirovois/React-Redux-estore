@@ -65,3 +65,14 @@ export const addToBasket = (id) => async(dispatch, getState) => {
         })
         localStorage.setItem('personalDetails', JSON.stringify(data))
     } 
+    export  const resetPersonalDetails = () =>async (dispatch, getState) =>{
+        try{
+            dispatch({
+                type:"RESET_PERSONAL_DETAILS"
+            })
+            localStorage.setItem('personalDetails', JSON.stringify(getState()))
+        }
+        catch(error){
+            console.log(error.message)
+        }
+    }

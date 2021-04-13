@@ -3,6 +3,7 @@ import {useHistory} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {savePersonalDetails} from '../actions/basketActions'
 import {BiChevronsLeft} from 'react-icons/bi'
+import {BiChevronsRight} from 'react-icons/bi'
 
 const Checkout = ({history}) => {
     const dispatch = useDispatch()
@@ -234,7 +235,10 @@ const Checkout = ({history}) => {
                 <button onClick={() => history.push('/basket')} className='btn btn-primary'> 
                     <BiChevronsLeft size={20}/>Back to cart
                  </button>
-                <button class="btn btn-primary" type="submit">Payment</button>
+                <button class="btn btn-primary" type="submit">
+                    Payment
+                    <BiChevronsRight size={20}/>
+                    </button>
             </div>
 
             </form>
