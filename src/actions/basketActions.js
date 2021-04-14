@@ -1,9 +1,10 @@
 import axios from 'axios'
 
+const URL = 'https://miro-estore-app.herokuapp.com'
 export const addToBasket = (id) => async(dispatch, getState) => {
         
     try{
-        const {data} = await axios.get(`/items/${id}`)
+        const {data} = await axios.get(`${URL}/items/${id}`)
         dispatch({
             type:'ADD_TO_BASKET',
             payload:
