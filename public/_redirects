@@ -1,4 +1,4 @@
 
 /orders    https://miro-estore-app.herokuapp.com/orders   200
-/*    https://miro-estore-app.herokuapp.com/items:splat 
+/*    https://miro-estore-app.herokuapp.com/items/:splat 
 /*    https://miro-estore-app.herokuapp.com/:splat 
