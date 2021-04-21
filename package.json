@@ -1,0 +1,20 @@
+{
+  "name": "e-store",
+  "version": "1.0.0",
+  "description": "e-store",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server/server",
+    "server": "nodemon server/server"
+  },
+  "author": "Myroslav Voysovych",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^6.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.5",
+    "nodemon": "^2.0.7"
+  }
+}
