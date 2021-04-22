@@ -1,10 +1,10 @@
 import axios from 'axios'
 
-const URL = 'https://miro-estore-app.herokuapp.com'
+// const URL = 'https://miro-estore-app.herokuapp.com'
 
 export const fetchOrders = () =>async (dispatch) =>{
         try{
-            const {data} = await axios.get(`${URL}/orders`)
+            const {data} = await axios.get('/orders')
                 dispatch({
                     type:'FETCH_ORDERS',
                     payload:data
@@ -18,7 +18,7 @@ export const fetchOrders = () =>async (dispatch) =>{
 export const addOrder = (order) =>async (dispatch) => {
         try{
             dispatch({type:'ORDER_ADD_REQUEST'})
-            const {data} = await axios.post(`${URL}/orders`, order)
+            const {data} = await axios.post('/orders', order)
               dispatch({
                 type: 'ORDER_ADD_SUCCESS',
                 payload: data
