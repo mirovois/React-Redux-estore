@@ -14,8 +14,6 @@ connectDB()
 const app = express()
 app.use(express.json())
 app.use(cors())
-app.use('/items', itemRouter)
-app.use('/orders', orderRouter)
 
 // const __dirname = path.resolve()
 // Set fron-end production build as static folder
@@ -28,9 +26,10 @@ if(process.env.NODE_ENV === 'production') {
 } else {
     app.get('/', (req, res) =>{
         res.send('API is running...')
-    })
-
+    })    
 }
+app.use('/items', itemRouter)
+app.use('/orders', orderRouter)
 
 const PORT = process.env.PORT || 5000
 
