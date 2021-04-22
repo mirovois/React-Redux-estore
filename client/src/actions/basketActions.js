@@ -17,7 +17,7 @@ export const addToBasket = (id) => async(dispatch, getState) => {
                 quantity:data.quantity
             }
         })
-        localStorage.setItem('basket', JSON.stringify(getState().basket))
+        localStorage.setItem('basketItems', JSON.stringify(getState().basket.basketItems))
     }
     catch(error){
         console.log(error)
@@ -30,7 +30,7 @@ export const addToBasket = (id) => async(dispatch, getState) => {
                 type:"REMOVE_FROM_BASKET",
                 payload: id
             })
-            localStorage.setItem('basket', JSON.stringify(getState().basket))
+            localStorage.setItem('basketItems', JSON.stringify(getState().basket.basketItems))
         }
         catch(error){
             console.log(error.message)
@@ -41,8 +41,7 @@ export const addToBasket = (id) => async(dispatch, getState) => {
             dispatch({
                 type:"EMPTY_BASKET"
             })
-            localStorage.setItem('basket', JSON.stringify(getState().basket))
-            // localStorage.clear();
+            localStorage.setItem('basketItems', JSON.stringify(getState().basket.basketItems))
         }
         catch(error){
             console.log(error.message)
@@ -61,21 +60,21 @@ export const addToBasket = (id) => async(dispatch, getState) => {
         }
     }  
 
-    // export const savePersonalDetails = (data) => (dispatch) =>{
-    //     dispatch({
-    //         type:'SAVE_PERSONAL_DETAILS',
-    //         payload:data
-    //     })
-    //     localStorage.setItem('personalDetails', JSON.stringify(data))
-    // } 
-    // export  const resetPersonalDetails = () =>async (dispatch, getState) =>{
-    //     try{
-    //         dispatch({
-    //             type:"RESET_PERSONAL_DETAILS"
-    //         })
-    //         localStorage.setItem('personalDetails', JSON.stringify(getState()))
-    //     }
-    //     catch(error){
-    //         console.log(error.message)
-    //     }
-    // }
+    export const savePersonalDetails = (data) => (dispatch) =>{
+        dispatch({
+            type:'SAVE_PERSONAL_DETAILS',
+            payload:data
+        })
+        localStorage.setItem('personalDetails', JSON.stringify(data))
+    } 
+    export  const resetPersonalDetails = () =>async (dispatch, getState) =>{
+        try{
+            dispatch({
+                type:"RESET_PERSONAL_DETAILS"
+            })
+            localStorage.setItem('personalDetails', JSON.stringify(getState()))
+        }
+        catch(error){
+            console.log(error.message)
+        }
+    }

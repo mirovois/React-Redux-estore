@@ -5,15 +5,14 @@ import {useDispatch, useSelector} from 'react-redux'
 import {BiChevronsLeft} from 'react-icons/bi'
 import {addOrder} from  '../actions/orderActions'
 import {emptyBasket} from '../actions/basketActions'
-// import {resetPersonalDetails} from '../actions/basketActions'
+import {resetPersonalDetails} from '../actions/basketActions'
 import Modal from './Modal'
-// import Modal from './Modal'
 
 const Payment = ({history}) => {
     const dispatch = useDispatch()
     const basketContent = useSelector(state => state.basket)
 
-    const{basket} = basketContent
+    const{basketItems,personalDetails} = basketContent
         
     const [showModal, setShowModal] = useState(false)
     
@@ -44,7 +43,7 @@ const Payment = ({history}) => {
             [field]: null
         }) }
     
-    const totalPrice = basket.reduce((acc, item) => acc + item.price*item.inBasket, 0).toFixed(2)
+    const totalPrice = basketItems.reduce((acc, item) => acc + item.price*item.inBasket, 0).toFixed(2)
         
     const handlePlaceOrder =(e) =>{
             e.preventDefault()
@@ -59,22 +58,14 @@ const Payment = ({history}) => {
                     cvv:form.cvv,
                     cardNumber:form.cardNumber
                 }
-                console.log('Submitted!!!',personal)
-                const order = {
-                    orderItems:basket,
-                    personalDetails:personalDetails,
-                    totalPrice:Number(totalPrice)
-                }
                 dispatch(addOrder({
-                    orderItems:basket,
+                    orderItems:basketItems,
                     personalDetails:personalDetails,
                     totalPrice:Number(totalPrice)
                 }))
                 setShowModal(true)
-                dispatch(emptyBasket())
-                dispatch(resetPersonalDetails())
-                // history.push('/')
-                console.log('Created order:',order)      
+                dispatch(emptyBasket()) 
+                dispatch(resetPersonalDetails())   
             }
         }
 
@@ -166,8 +157,8 @@ const Payment = ({history}) => {
                 <h5 class="font-weight-bold">Shipping address</h5>
                 <p>{personalDetails.address}, {personalDetails.postal}
                 <br/> {personalDetails.city}, {personalDetails.country}</p>
-                <h5 class="font-weight-bold">Items({basket?.length})</h5>
-                {basket.map(item =>(
+                <h5 class="font-weight-bold">Items({basketItems?.length})</h5>
+                {basketItems.map(item =>(
                 <div class="d-flex justify-content-between mt-2"> <span class="fw-500">{item.name} X {item.inBasket}</span> <span>${item.price*item.inBasket}</span> </div>
                 ))}
                 <hr/>

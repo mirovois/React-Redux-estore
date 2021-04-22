@@ -7,14 +7,17 @@ import order from './reducers/orderReducer'
 
 const reducer = combineReducers({items, basket, order})
 
-const basketItemsStorage = localStorage.getItem('basket') ? JSON.parse(localStorage.getItem('basket')) : []
-// const personalDetailsStorage = localStorage.getItem('personalDetails') ? JSON.parse(localStorage.getItem('personalDetails')) : {}
+const basketItemsStorage = localStorage.getItem('basketItems') ? JSON.parse(localStorage.getItem('basketItems')) : []
+const personalDetailsStorage = localStorage.getItem('personalDetails') ? JSON.parse(localStorage.getItem('personalDetails')) : {}
 
 
 const initialState = {
-    basket:basketItemsStorage}
+    basket:{
+        basketItems:basketItemsStorage,
+        personalDetails:personalDetailsStorage
+}
+}
 
-// const initialState = {}
 const middleware = [thunk]
 
 const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middleware)))

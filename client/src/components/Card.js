@@ -7,17 +7,17 @@ export const Card = ({id,name,image,price,quantity}) => {
 
     const dispatch = useDispatch()
     const basketContent = useSelector(state => state.basket)
-    const{basket} = basketContent
+    const{basketItems} = basketContent
 
 
-    let storeItem = basket?.find(object => object.item === id);
+    let storeItem = basketItems?.find(object => object.item === id);
 
     const buttonDisabled = storeItem ? true : false;
    
     const handleAdd = () =>{        
         dispatch(addToBasket(id))
        
-        console.log('Added to basket. Basket:',basket)
+        console.log('Added to basket. Basket:',basketItems)
     }
 
     return (

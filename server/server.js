@@ -15,11 +15,11 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-// const __dirname = path.resolve()
-// Set fron-end production build as static folder
+
 app.use('/items', itemRouter)
 app.use('/orders', orderRouter)
 
+// Set fron-end production build as static folder
 if(process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname,'../client/build')))
     

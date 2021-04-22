@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-// const URL = 'https://miro-estore-app.herokuapp.com'
 export const getItems = () =>async (dispatch) => {
         try{
             dispatch({type:'FETCH_REQUEST'})

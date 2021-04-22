@@ -7,13 +7,14 @@ import {fetchOrders} from '../actions/orderActions'
 
 const Header = () => {
     const basketContent = useSelector((state) => state.basket)
-    const {basket} = basketContent
+    const {basketItems} = basketContent
     const {orders} = useSelector(state =>state.order)
     
     const dispatch = useDispatch()
     useEffect (() =>{
         dispatch(fetchOrders())
     },[dispatch])
+    
     return (
         <div class='container-fluid d-flex justify-content-between p-2' style={{backgroundColor: '#e4a2fe',}}>       
                 <Link to='/'>
@@ -34,8 +35,8 @@ const Header = () => {
                         <Link to='/basket' style={{'textDecoration':'none'}}>
                         <HiShoppingCart class='mx-1' style={{height:'40',width:'20'}}/>
                         <span>Basket</span>
-                        {basket?.length>0 && 
-                        <strong>({basket.length})</strong>             
+                        {basketItems?.length>0 && 
+                        <strong>({basketItems.length})</strong>             
                         }
                         </Link>
             </div>

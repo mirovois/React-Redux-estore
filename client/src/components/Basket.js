@@ -13,17 +13,14 @@ const Basket = () => {
     const dispatch = useDispatch()
     
     const basketContent = useSelector(state => state.basket)
-    const{basket} = basketContent
+    const{basketItems} = basketContent
   
-    console.log('Basket component -basket')
     const handleRemove = (idi) =>{
         dispatch(removeFromBasket(idi))
-        console.log('Clicked for delete', idi)
     }
 
     const handleIncrease = (idi) =>{
         dispatch(addToBasket(idi))
-        // dispatch(decreaseTotal(idi))
     }
 
     const handleDecrease = (idi) =>{
@@ -32,20 +29,17 @@ const Basket = () => {
 
     const handleEmptyBasket = () =>{
         dispatch(emptyBasket())
-        console.log('Empty basket')
     }
 
-    const handleCheckout = () =>{
-        history.push('/checkout')
-    }
+    // const handleCheckout = () =>{
+    //     history.push('/checkout')
+    // }
 
     return (
         <>
-        {basket?.length ===0 ? 
-            <h1 className='text-center my-4'>Your shopping basket is empty</h1>
-            :
-            (
-                <div class="container  mt-4">
+        { basketItems && basketItems.length ===0 ? 
+            <h1 className='text-center my-4'>Your shopping basket is empty</h1>  :
+            (  <div class="container  mt-4">
                 <h1 class="display-4">Shopping basket</h1>
                 <p class="lead">You can change quantity of any product by adding or removing a certain item.</p>
                 <hr/>
@@ -61,7 +55,7 @@ const Basket = () => {
                             </tr>
                             </thead>
                             <tbody>
-                        {basket?.map((item,i) =>
+                        {basketItems.map((item,i) =>
                             (<tr key={i}>
                                 <th>{i+1}</th>
                                 <td className='text-center'>{item.name}</td>
@@ -95,15 +89,14 @@ const Basket = () => {
                 </button>
             </div>
         </div>
-
                     <div className='col-xs-12 col-md-4'>
                         <div className='mx-2 p-4 bg-light'>
                         <h1>Checkout</h1>
                         <div className='d-flex justify-content-between align-items-center'>
                             <h2 style={{'display':'inline-block'}}>Total:</h2>
-                            <h4 className='mr-4'>${basket?.reduce((acc, item) => acc + item.price*item.inBasket, 0).toFixed(2)}</h4>    
+                            <h4 className='mr-4'>${basketItems.reduce((acc, item) => acc + item.price*item.inBasket, 0).toFixed(2)}</h4>    
                         </div>
-                        <button className= 'btn btn-primary mt-2' onClick={handleCheckout}>
+                        <button className= 'btn btn-primary mt-2' onClick={() => history.push('/checkout')}>
                             Proceed to checkout
                             <BiChevronsRight />
                             </button>

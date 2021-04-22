@@ -8,11 +8,8 @@ import {BiChevronsRight} from 'react-icons/bi'
 const Checkout = ({history}) => {
     const dispatch = useDispatch()
     const basketContent = useSelector(state => state.basket)
+    const{basketItems, personalDetails} = basketContent
 
-    const{basket, personalDetails} = basketContent
-
-
-    
     const[firstName,setFirstName] = useState(personalDetails.firstName)
     const[lastName,setLastName] = useState(personalDetails.lastName)
     const[email,setEmail] = useState(personalDetails.email)
@@ -246,11 +243,11 @@ const Checkout = ({history}) => {
         <div class="col-md-1"> </div>
         <div class="col-md-4">
             <div class="bg-pay p-3"> <h4 class="font-weight-bold">Order Recap</h4>
-                {basket.map(item =>(
+                {basketItems.map(item =>(
                 <div class="d-flex justify-content-between mt-2"> <span class="fw-500">{item.name} X {item.inBasket}</span> <span>${item.price*item.inBasket}</span> </div>
                 ))}
                 <hr/>
-                <div class="d-flex justify-content-between mt-2"> <span class="fw-500">Total </span> <span class="text-success">${basket.reduce((acc, item) => acc + item.price*item.inBasket, 0).toFixed(2)}</span> </div>
+                <div class="d-flex justify-content-between mt-2"> <span class="fw-500">Total </span> <span class="text-success">${basketItems.reduce((acc, item) => acc + item.price*item.inBasket, 0).toFixed(2)}</span> </div>
             </div>
         </div>
              
