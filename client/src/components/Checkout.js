@@ -83,10 +83,10 @@ const Checkout = ({history}) => {
     }
     
     return (
-        <div className='container '>
+        <div className='container-fluid bg-dark min-vh-100'>
             <div className='row mt-4'>
 
-            <form  className='col-sm-12 col-md-8 col-lg-6 bg-light m-auto' onSubmit={handleSubmit}>
+            <form  className='col-sm-12 col-md-8 col-lg-6 bg-secondary m-auto' onSubmit={handleSubmit}>
             <div class="row mb-1 px-4">
                 <h3 className='mb-4'>Personal details</h3>
                 {/* FIRST NAME */}
@@ -220,10 +220,10 @@ const Checkout = ({history}) => {
 
              <div class="col-auto mt-4 mb-4">
                 <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="autoSizingCheck"/>
-                <label class="form-check-label" for="autoSizingCheck">
-                    Subscribe
-                </label>
+                    <input type="checkbox" class="form-check-input" id="dropdownCheck"/>
+                    <label class="form-check-label" for="dropdownCheck">
+                        Subscribe
+                    </label>
                 </div>
             </div>
 

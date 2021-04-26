@@ -26,3 +26,25 @@ export const getItems = () =>async (dispatch) => {
             console.log(error.message)
         }
     }
+    export const sortItems = (items, sort) => async(dispatch) =>{
+        
+        const sortedItems = items.slice()
+
+        if(sort ===''){
+            sortItems.sort((a,b) => (a.item) > b.item ? 1 : -1)
+        }
+         else {
+            sortedItems.sort((a,b) => sort ==='price' ? a.price > b.price ? 1 : -1 :a.name > b.name ? 1 :-1
+            )
+        }
+            console.log('Sorted items', sortedItems)
+            dispatch({
+                type:'SORT_ITEMS',
+                payload:{
+                    sort:sort,
+                    items:sortedItems
+                }
+            })
+        
+        
+    }

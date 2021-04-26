@@ -3,6 +3,10 @@ input {
   border: none;
   border-bottom: 1px solid grey;
 }
+.app {
+  display: flex;
+  flex-direction: column;
+}
 
 /* PAYMENT */
 .creditCardForm {
@@ -128,3 +132,101 @@ textarea:focus:valid {
 }
 
 /* _redirects CONTENT */
+/* LOADER */
+/* .loader {
+  width: 100%;
+  display: grid;
+  place-items: center;
+} */
+
+/* CARD */
+/* .btn {
+  outline: none;
+} */
+.card-image {
+  overflow: hidden;
+}
+.card-image img {
+  transition: transform 2s, filter 1s ease-in-out;
+  transform-origin: center center;
+  filter: brightness(80%);
+}
+.card-image:hover img {
+  filter: brightness(100%);
+  transform: scale(1.1);
+}
+.card-body button {
+  color: #fff;
+}
+.card-body button:hover {
+  background-color: aliceblue;
+  color: black important!;
+}
+image {
+  transition: all 0.5s ease 1s;
+}
+image:hover {
+  transform: scale(1.1);
+}
+
+/* NAVBAR */
+nav {
+  background: #11998e; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #11998e,
+    #38ef7d
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #11998e,
+    #38ef7d
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+/* DROPDOWN */
+select {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  -webkit-padding-end: 20px;
+  -moz-padding-end: 20px;
+  -webkit-padding-start: 2px;
+  -moz-padding-start: 2px;
+  padding: 6px;
+  color: #a39c9c;
+  font-size: 1rem;
+  overflow: hidden;
+  background: rgb(48, 87, 95);
+  color: #aeb9c5;
+  border: #dbe8f5;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+}
+select::-ms-expand {
+  display: none;
+}
+select option {
+  background-color: rgb(45, 71, 63);
+  cursor: pointer;
+}
+
+/* BASKET */
+.basket-leave {
+  opacity: 1;
+}
+.basket-leave.basket-leave-active {
+  opacity: 0.01;
+  transition: opacity 400ms ease-in;
+}
+.btn-del:hover {
+  transform: scale(1.07);
+}
+/* .btn-ctrl {
+  color: white important!;
+} */
+.btn-ctrl:hover {
+  opacity: 0.6;
+}

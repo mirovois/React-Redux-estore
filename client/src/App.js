@@ -5,16 +5,16 @@ import {Provider} from 'react-redux'
 import store from './store'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import Header from './components/Header';
-import { Home } from './components/Home';
 import Basket from './components/Basket';
 import Checkout from './components/Checkout';
 import Payment from './components/Payment';
 import Orders from './components/Orders';
+import Home from './components/Home';
 
 function App() {
   return (
     <Provider store={store}>
-    <div className="App">
+    <div className="app">
       <Header />
       <Switch>
         <Route path='/' exact component={Home}/> 
