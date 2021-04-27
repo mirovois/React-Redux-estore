@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import {useHistory} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {savePersonalDetails} from '../actions/basketActions'
 import {BiChevronsLeft} from 'react-icons/bi'
@@ -83,11 +82,11 @@ const Checkout = ({history}) => {
     }
     
     return (
-        <div className='container-fluid bg-dark min-vh-100'>
-            <div className='row mt-4'>
+        <div className='container-fluid bg-dark min-vh-100 p-0 p-md-2'>
+            <div className='row my-4 mt-sm-4 mx-1 mx-md-2'>
 
-            <form  className='col-sm-12 col-md-8 col-lg-6 bg-secondary m-auto' onSubmit={handleSubmit}>
-            <div class="row mb-1 px-4">
+            <form  className='col-10 col-sm-7 col-md-8 col-lg-6 order-1 order-md-0 bg-transparent border rounded-3 text-light m-auto p-0 p-md-4' onSubmit={handleSubmit}>
+            <div class="row mb-1 px-4 px-sm-2">
                 <h3 className='mb-4'>Personal details</h3>
                 {/* FIRST NAME */}
                 <label class="col-sm-4 col-md-4 col-lg-4 col-form-label-lg">First name * :</label>          
@@ -108,7 +107,7 @@ const Checkout = ({history}) => {
                 </div>
              </div>
                 {/* LAST NAME */}
-             <div class="row mb-3 px-4">
+             <div class="row mb-3 px-4 px-sm-2">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-form-label-lg">Last name * :</label>          
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <input type="text" 
@@ -126,7 +125,7 @@ const Checkout = ({history}) => {
                 </div>
              </div>
                 {/* EMAIL */}
-             <div class="row mb-3 px-4">
+             <div class="row mb-3 px-4 px-sm-2">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-form-label-lg">Email * :</label>          
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <input type="text" 
@@ -143,8 +142,8 @@ const Checkout = ({history}) => {
                 }
                 </div>
              </div>
-
-             <div class="row mb-3 px-4">
+            <hr/>
+             <div class="row mb-3 px-4 px-sm-2">
              <h3 className='mb-3'>Shipping</h3>
                 {/* ADDRESS */}
                 <label class="col-sm-4 col-md-4 col-lg-4 col-form-label-lg">Address * :</label>          
@@ -164,7 +163,7 @@ const Checkout = ({history}) => {
                 </div>
              </div>
 
-             <div class="row mb-3 px-4">
+             <div class="row mb-3 px-4 px-sm-2">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-form-label-lg">City * :</label>          
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <input type="text" 
@@ -182,7 +181,7 @@ const Checkout = ({history}) => {
                 </div>
              </div>
 
-             <div class="row mb-3 px-4">
+             <div class="row mb-3 px-4 px-sm-2">
                 <label class="col-sm-4 col-md-4 col-lg-4 col-form-label-lg">Country * :</label>          
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <input type="text" 
@@ -200,8 +199,8 @@ const Checkout = ({history}) => {
                 </div>
              </div>
                 {/* POSTAL CODE */}
-             <div class="row mb-3 px-4">
-                <label class="col-sm-4 col-md-4 col-lg-4 col-form-label-lg">Postal Code * :</label>          
+             <div class="row mb-3 px-4 px-sm-2">
+                <label class="col-sm-4 col-md-4 col-lg-4 col-form-label-lg">Postal Code* :</label>          
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <input type="text" 
                        className="form-control"
@@ -217,45 +216,32 @@ const Checkout = ({history}) => {
                 }
                 </div>
              </div>
-
-             <div class="col-auto mt-4 mb-4">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="dropdownCheck"/>
-                    <label class="form-check-label" for="dropdownCheck">
-                        Subscribe
-                    </label>
-                </div>
-            </div>
-
            
-            <div class="col-10 d-flex justify-content-between mb-4">
-                <button onClick={() => history.push('/basket')} className='btn btn-primary'> 
-                    <BiChevronsLeft size={20}/>Back to cart
+            <div class="col-10 mx-auto mx-sm-0 d-flex justify-content-between mb-4">
+                <button onClick={() => history.push('/basket')} className='btn btn-ctrl btn-transparent border text-light border-3 border-secondary btn-sm btn-md-lg'> 
+                    <BiChevronsLeft size={25}/>Back to cart
                  </button>
-                <button class="btn btn-primary" type="submit">
+                <button class="btn btn-ctrl btn-transparent border  text-light border-3 border-secondary btn-sm btn-lg" type="submit">
                     Payment
-                    <BiChevronsRight size={20}/>
+                    <BiChevronsRight size={25}/>
                     </button>
             </div>
 
             </form>
                 
-        <div class="col-md-1"> </div>
-        <div class="col-md-4">
-            <div class="bg-pay p-3"> <h4 class="font-weight-bold">Order Recap</h4>
+        {/* <div class="col-0 col-lg-2"> </div> */}
+            <div class="col-10 mx-auto my-4 my-sm-0 col-sm-5 col-md-4 ">
+            <div class="bg-secondary text-light p-3">
+                <h4 class="font-weight-bold">Order Recap</h4>
                 {basketItems.map(item =>(
                 <div class="d-flex justify-content-between mt-2"> <span class="fw-500">{item.name} X {item.inBasket}</span> <span>${item.price*item.inBasket}</span> </div>
                 ))}
                 <hr/>
-                <div class="d-flex justify-content-between mt-2"> <span class="fw-500">Total </span> <span class="text-success">${basketItems.reduce((acc, item) => acc + item.price*item.inBasket, 0).toFixed(2)}</span> </div>
+                <div class="d-flex justify-content-between mt-2"> <span class="fw-500 text-lead">Total </span> <span class="lead">${basketItems.reduce((acc, item) => acc + item.price*item.inBasket, 0).toFixed(2)}</span> </div>
             </div>
         </div>
-             
-
-
             </div>
         </div>
     )
 }
-
 export default Checkout

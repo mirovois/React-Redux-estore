@@ -1,12 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
+
 input {
   outline: none;
   border: none;
   border-bottom: 1px solid grey;
 }
-.app {
+/* .app {
   display: flex;
   flex-direction: column;
-}
+} */
 
 /* PAYMENT */
 .creditCardForm {
@@ -116,7 +118,7 @@ textarea:focus:valid {
   height: 100vh;
   background: rgba(0, 0, 0, 0.8);
 }
-.myModal .myContainer {
+/* .myModal .myContainer {
   position: absolute;
   left: 50%;
   top: 25%;
@@ -129,7 +131,7 @@ textarea:focus:valid {
     rgba(0, 212, 255, 1) 100%
   );
   color: black;
-}
+} */
 
 /* _redirects CONTENT */
 /* LOADER */
@@ -183,7 +185,21 @@ nav {
     #38ef7d
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-
+.navbar-collapse.in {
+  display: block !important;
+}
+.header__title {
+  font-family: "Shadows Into Light", cursive;
+}
+.active {
+  /* opacity: 0.6; */
+}
+.nav-link {
+  transition: linear ease-in-out 0.5s;
+}
+.nav-link:hover {
+  transform: scale(1.05);
+}
 /* DROPDOWN */
 select {
   -webkit-appearance: button;
@@ -230,3 +246,23 @@ select option {
 .btn-ctrl:hover {
   opacity: 0.6;
 }
+
+/* Loading spinner */
+.loading {
+  /* display: block; */
+  margin-right: 7px;
+  top: 2px;
+  animation: spin 1s infinite linear;
+}
+@keyframes spin {
+  from {
+    transform: scale(1) rotate(0deg);
+  }
+  to {
+    transform: scale(1) rotate(360deg);
+  }
+}
+.hide {
+  display: none;
+}
+/* End Loading spinner */

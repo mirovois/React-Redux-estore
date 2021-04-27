@@ -31,14 +31,14 @@
         quantity:2,
         price:4.05
     },
-    {
+    // {
         
-        name:'Whole Wheat',
-        description:'7 Seeds Whole wheat Bread made using flour that is partly from almost-whole wheat grains',
-        image:"https://source.unsplash.com/8JGA8LZv9i4",
-        quantity:4,
-        price:3.79
-    },
+    //     name:'Whole Wheat',
+    //     description:'7 Seeds Whole wheat Bread made using flour that is partly from almost-whole wheat grains',
+    //     image:"https://source.unsplash.com/8JGA8LZv9i4",
+    //     quantity:4,
+    //     price:3.79
+    // },
     {
        
         name:'White bread',
@@ -48,15 +48,15 @@
         price:4.05
 
     },
-    {
-        id:7,
-        name:'Focaccia',
-        description:'Flat oven-baked Italian bread similar in style and texture to pizza. ',
-        image:"https://source.unsplash.com/s2VbmuZzo60",
-        quantity:8,
-        price:3.95
+    // {
+    //     id:7,
+    //     name:'Focaccia',
+    //     description:'Flat oven-baked Italian bread similar in style and texture to pizza. ',
+    //     image:"https://source.unsplash.com/s2VbmuZzo60",
+    //     quantity:8,
+    //     price:3.95
 
-    },
+    // },
     {
         id:8,
         name:'Baguette',

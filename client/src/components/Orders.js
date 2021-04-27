@@ -13,11 +13,11 @@ const Orders = () => {
 
     console.log('Order component', orders)
     return (
-        <div className='container'>
-            <h1 className='text-center'>Placed orders</h1>
+        <div className='container-fluid bg-dark min-vh-100 text-light py-4'>
+            <h1 className='text-center my-4'>Placed orders</h1>
             {/* <div className='row p-2'> */}
             {orders?.map(order =>(
-                <div className='col-xs-12 col-sm-10 col-md-8 bg-light mx-auto border border-black border-5 p-4 mx-4 mb-4'>
+                <div className='col-xs-12 col-sm-10 col-md-8 bg-secondary mx-auto border border-black border-5 p-4 mx-4 mt-4'>
                     <h2>Order <small>({order._id})</small></h2>  
                     <div className='border-bottom'>
                     <h4>Receiver:</h4>

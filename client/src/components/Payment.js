@@ -3,6 +3,7 @@ import visa from '../assets/visa.svg.png'
 import mastercard from'../assets/mastercard.svg'
 import {useDispatch, useSelector} from 'react-redux'
 import {BiChevronsLeft} from 'react-icons/bi'
+import {BsArrowRepeat} from 'react-icons/bs'
 import {addOrder} from  '../actions/orderActions'
 import {emptyBasket} from '../actions/basketActions'
 import {resetPersonalDetails} from '../actions/basketActions'
@@ -15,7 +16,7 @@ const Payment = ({history}) => {
     const{basketItems,personalDetails} = basketContent
         
     const [showModal, setShowModal] = useState(false)
-    
+    const[loading, setLoading] = useState(false)
     const[form,setForm] = useState({})
     
     const[errors, setErrors] = useState({})
@@ -48,36 +49,40 @@ const Payment = ({history}) => {
     const handlePlaceOrder =(e) =>{
             e.preventDefault()
             const newErrors = findFormErrors()
-    
+            setLoading(true)
             if (Object.keys(newErrors).length > 0) {
                 setErrors(newErrors)
+                setLoading(false)
                 console.log('Error is:',newErrors)
             } else{
-                const personal = {
-                    owner:form.owner,
-                    cvv:form.cvv,
-                    cardNumber:form.cardNumber
-                }
-                dispatch(addOrder({
-                    orderItems:basketItems,
-                    personalDetails:personalDetails,
-                    totalPrice:Number(totalPrice)
-                }))
-                setShowModal(true)
-                dispatch(emptyBasket()) 
-                dispatch(resetPersonalDetails())   
+                setTimeout(() =>{
+                    const personal = {
+                        owner:form.owner,
+                        cvv:form.cvv,
+                        cardNumber:form.cardNumber
+                    }
+                    dispatch(addOrder({
+                        orderItems:basketItems,
+                        personalDetails:personalDetails,
+                        totalPrice:Number(totalPrice)
+                    }))
+                    setShowModal(true)
+                    setLoading(false)
+                    dispatch(emptyBasket()) 
+                    dispatch(resetPersonalDetails())   
+                },2000)
             }
         }
 
     return (
-        <div className='container mt-3 mb-3 mr-4'>
+        <div className='container-fluid bg-dark min-vh-100 p-0 p-md-4'>
 
             <div className="row">
 
     {/* CREDIT CARD FORM */}
-                <div className='col-md-6 creditCardForm'>
+                <div className='col-sm-7 col-md-6 creditCardForm bg-transparent border rounded-3 text-light order-1 order-md-0 '>
                     <div class="heading">
-                        <h1>Confirm Purchase</h1>
+                        <h1 className='text-lead text-white'>Confirm Purchase</h1>
                     </div>
                     <div class="payment">
                         
@@ -128,15 +133,15 @@ const Payment = ({history}) => {
                                 <img src={mastercard} id="mastercard" style={{height:'50px',width:'100px'}}/>
                             </div>
 
-                            {/* <div class="form-group" id="pay-now">
-                                <button type="submit" class="btn btn-primary" id="confirm-purchase">Confirm</button>
-                            </div> */}
-                            <div class="col-12 d-flex justify-content-between mb-4 mt-4">
-                                <button onClick={() => history.push('/checkout')} className='btn btn-primary'>  
-                                <BiChevronsLeft size={28}/>
+                            <div class="col-12 d-flex justify-content-between my-4">
+                                <button onClick={() => history.push('/checkout')} className='btn btn-ctrl btn-transparent border text-light border-3 border-secondary btn-sm p-0 p-lg-3'>  
+                                <BiChevronsLeft size={25}/>
                                 Back to checkout
                                 </button>
-                                <button class="btn btn-primary" type="submit">Confirm</button>
+                                <button class="btn btn-ctrl btn-transparent border text-light border-3 border-secondary btn-sm btn-sm-lg" type="submit">
+                                <BsArrowRepeat size={25} className={loading ? 'loading' : 'hide'}/>    
+                                {loading ? 'Verifying...' : 'Confirm'}
+                                    </button>
                             </div>
                         </form>    
                     </div>
@@ -148,24 +153,24 @@ const Payment = ({history}) => {
             <Modal showModal={showModal} setShowModal={setShowModal} history={history}/>            
                 )}
 
-{/* Shipping recap */}
-<div class="col-md-1"> </div>
-        <div class="col-md-4 mt-4 pt-4">
-            <div class="bg-pay p-3"> <h3 class="font-weight-bold">Order Recap</h3>
-                <h5 class="font-weight-bold">Receiver:</h5>
-                <p>{personalDetails.firstName} {personalDetails.lastName}</p>
-                <h5 class="font-weight-bold">Shipping address</h5>
-                <p>{personalDetails.address}, {personalDetails.postal}
-                <br/> {personalDetails.city}, {personalDetails.country}</p>
-                <h5 class="font-weight-bold">Items({basketItems?.length})</h5>
-                {basketItems.map(item =>(
-                <div class="d-flex justify-content-between mt-2"> <span class="fw-500">{item.name} X {item.inBasket}</span> <span>${item.price*item.inBasket}</span> </div>
-                ))}
-                <hr/>
-                <div class="d-flex justify-content-between mt-2"> <span class="fw-500">Total </span> <span class="text-success">${totalPrice}</span> </div>
-                <hr/>
-            </div>
-        </div>
+                {/* Shipping recap */}
+
+                    <div class="col-10 col-md-4 mx-auto mb-4 pt-4 pt-md-0">
+                        <div class="bg-secondary text-light p-3"> <h3 class="font-weight-bold">Order Recap</h3>
+                        <hr/>
+                            <h5 class="font-weight-bold">Receiver:</h5>
+                            <p>{personalDetails.firstName} {personalDetails.lastName}</p>
+                            <h5 class="font-weight-bold">Shipping address</h5>
+                            <p>{personalDetails.address}, {personalDetails.postal}
+                            <br/> {personalDetails.city}, {personalDetails.country}</p>
+                            <h5 class="font-weight-bold">Items({basketItems?.length})</h5>
+                            {basketItems.map(item =>(
+                            <div class="d-flex justify-content-between mt-2"> <span class="fw-500">{item.name} X {item.inBasket}</span> <span>${item.price*item.inBasket}</span> </div>
+                            ))}
+                            <hr/>
+                            <div class="d-flex justify-content-between mt-2"> <span class="fw-500 text-lead">Total </span> <span class="text-lead">${totalPrice}</span> </div>
+                        </div>
+                    </div>
             </div>
         </div>
 

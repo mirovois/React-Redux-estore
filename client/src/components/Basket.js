@@ -35,10 +35,10 @@ const Basket = () => {
     // }
 
     return (
-        <div className='bg-dark vh-100 text-white'>
+        <div className='bg-dark min-vh-100 text-white'>
         { basketItems && basketItems.length ===0 ? 
-            <h1 className='text-center my-4'>Your shopping basket is empty</h1>  :
-            (  <div class="container  p-4 mt-4">
+            <h1 className='text-center py-4'>Your shopping basket is empty</h1>  :
+            (  <div class="container  p-4 mt-0">
                 <h1 class="display-4">Shopping basket</h1>
                 <p class="lead">You can change quantity of any product by adding or removing a certain item.</p>
                 <hr/>
